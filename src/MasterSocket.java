@@ -16,8 +16,10 @@ public class MasterSocket {
     public static void main(String[] args) throws Exception {
 
 	// MC parameters
-	int totalCount = 16000000; // total number of throws on a Worker
-	int total = 0; // total number of throws inside quarter of disk
+	int Ntot = 60000000; // total global fixe (strong scaling)
+	int totalCount ; // sera calculé en fonction de P
+
+        int total = 0;
 	double pi; 
 
 	int numWorkers = maxServer;
@@ -58,15 +60,14 @@ public class MasterSocket {
 	   writer[i] = new PrintWriter(new BufferedWriter(new OutputStreamWriter(sockets[i].getOutputStream())),true); // interface vers le flxu de sorti du socket
        }
 
-       String message_to_send;
-       message_to_send = String.valueOf(totalCount);
-
        String message_repeat = "y";
 
        long stopTime, startTime;
 
        while (message_repeat.equals("y")){
            total = 0;
+           totalCount = Ntot / numWorkers;
+           String message_to_send = String.valueOf(totalCount);
            startTime = System.currentTimeMillis();
 	   // initialize workers
 	   for(int i = 0 ; i < numWorkers ; i++) {
