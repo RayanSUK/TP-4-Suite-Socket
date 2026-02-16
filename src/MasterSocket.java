@@ -16,7 +16,7 @@ public class MasterSocket {
     public static void main(String[] args) throws Exception {
 
 	// MC parameters
-	int Ntot = 60000000; // total global fixe (strong scaling)
+	int Ntot = 120000000; // total global fixe (strong scaling)
 	int totalCount ; // sera calculé en fonction de P
 
         int total = 0;
