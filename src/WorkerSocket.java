@@ -30,12 +30,22 @@ public class WorkerSocket {
 	    str = bRead.readLine();          // read message from Master
 	    if (!(str.equals("END"))){
 		System.out.println("Server receives totalCount = " +  str);
-		
-		// compute
-		System.out.println("TODO : compute Monte Carlo and send total");
 
-	        pWrite.println(str);         // send number of points in quarter of disk
-	    }else{
+        // compute Monte Carlo and send total
+            int totalCount = Integer.parseInt(str);
+            int hits = 0;
+
+            for (int i = 0; i < totalCount; i++) {
+                double x = Math.random();
+                double y = Math.random();
+                if (x * x + y * y <= 1.0) {
+                    hits++;
+                }
+            }
+
+            pWrite.println(hits);
+
+        }else{
 		isRunning=false;
 	    }	    
         }
